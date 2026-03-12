@@ -1,0 +1,108 @@
+---
+import "../styles/global.css";
+import { Image } from "astro:assets";
+import background from "../assets/img/bg-footer.avif";
+import instagram from "../assets/icons/instagram-alt.svg";
+import facebook from "../assets/icons/facebook.svg";
+import tiktok from "../assets/icons/tiktok.svg";
+---
+
+<footer class="flex flex-col relative overflow-hidden bg-[#0D0D19]">
+    <Image
+        class="absolute inset-0 z-1 object-cover object-top h-[125%] brightness-60 mx-auto"
+        src={background}
+        alt="Fond du footer"
+    />
+    <div
+        class="relative flex w-full box-border h-auto py-2xl justify-center grid-cols-3 z-2"
+    >
+        <nav class="flex-1 max-w-75">
+            <h3
+                class="text-rougevif text-base font-semibold uppercase tracking-[0.03125rem] m-0 mb-(--spacing-2xl) pb-5"
+            >
+                Navigation
+            </h3>
+            <ul class="flex flex-col gap-5 list-none p-0 m-0 u-list-unstyled">
+                <li class="footer__item">
+                    <a class="footer__link" href="/">Accueil</a>
+                </li>
+                <li class="footer__item">
+                    <a class="footer__link" href="/aboutus">Le Festival</a>
+                </li>
+                <li class="footer__item">
+                    <a class="footer__link" href="/programme">Programme</a>
+                </li>
+                <li class="footer__item">
+                    <a class="footer__link" href="/artistes">Artistes</a>
+                </li>
+                <li class="footer__item">
+                    <a class="footer__link" href="/scenes">Scènes</a>
+                </li>
+                <li class="footer__item">
+                    <a class="footer__link" href="/infospratiques"
+                        >Infos pratiques</a
+                    >
+                </li>
+                <li class="footer__item">
+                    <a class="footer__link" href="/contact">Contact</a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="flex-1 max-w-75">
+            <h3
+                class="text-rougevif text-base font-semibold uppercase tracking-[0.03125rem] m-0 mb-(--spacing-2xl) pb-5"
+            >
+                Contact
+            </h3>
+            <p>
+                Email :
+                <a class="footer__link" href="mailto:contact@echossonore.fr">
+                    contact@echossonore.fr
+                </a>
+            </p>
+            <p>
+                Téléphone :
+                <a class="footer__link" href="tel:0715153681">
+                    07&nbsp;15&nbsp;15&nbsp;36&nbsp;81
+                </a>
+            </p>
+            <p>Adresse : Rue du Dalse, 25400 Audincourt</p>
+        </div>
+
+        <div class="flex-1 max-w-75">
+            <h3
+                class="text-rougevif text-base font-semibold uppercase tracking-[0.03125rem] m-0 mb-(--spacing-2xl) pb-5"
+            >
+                Réseaux sociaux
+            </h3>
+            <ul
+                class="flex flex-col gap-(--spacing-3xl) list-none p-(--spacing-md) u-list-unstyled"
+            >
+                <li class="footer__social-item">
+                    <Image src={instagram} alt="" loading="lazy" />
+                    <a class="footer__link" href="#" aria-label="Instagram">
+                        Instagram
+                    </a>
+                </li>
+                <li class="footer__social-item">
+                    <Image src={facebook} alt="" loading="lazy" />
+                    <a class="footer__link" href="#" aria-label="Facebook">
+                        Facebook
+                    </a>
+                </li>
+                <li class="footer__social-item">
+                    <Image src={tiktok} alt="" loading="lazy" />
+                    <a class="footer__link" href="#" aria-label="TikTok">
+                        TikTok
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <p class="p-(--spacing-lg) bg-bleulectrique text-center z-1">
+        &copy; 2026 Echos Sonore – Projet étudiant. Site fictif réalisé dans le
+        cadre de la SAE 105 – BUT MMI Montbéliard.
+    </p>
+</footer>

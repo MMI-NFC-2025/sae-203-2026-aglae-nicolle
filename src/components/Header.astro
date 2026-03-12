@@ -1,0 +1,52 @@
+---
+import "../styles/global.css";
+import { Image } from "astro:assets";
+import logo from "../assets/icons/logo-light.svg";
+---
+
+<header
+    class="absolute top-0 left-0 right-0 mx-auto w-full py-(--spacing-xl) px-(--spacing-2xl) flex items-center justify-between bg-noirbleunuit z-60"
+>
+    <nav class="w-full relative z-40">
+        <ul class="text-center items-center justify-between flex w-full">
+            <li>
+                <a class="header__link" href="/">
+                    <Image
+                        class="h-12 w-auto relative z-61"
+                        src={logo}
+                        alt="Logo du festival Echos Sonore"
+                    />
+                </a>
+            </li>
+            <li>
+                <a class="header__link" href="/"> Accueil </a>
+            </li>
+            <li>
+                <a class="header__link" href="/aboutus"> Le Festival </a>
+            </li>
+            <li>
+                <a class="header__link" href="/programme/"> Programme </a>
+            </li>
+            <li>
+                <a class="header__link" href="/artistes/"> Artistes </a>
+            </li><li>
+                <a class="header__link" href="/scenes/"> Scènes </a>
+            </li>
+            <li>
+                <a class="header__link" href="/infospratiques">
+                    Infos Pratiques
+                </a>
+            </li>
+            <li>
+                <a class="header__link" href="/contact"> Contact </a>
+            </li>
+            <li>
+                <a class="header__link" href="/connexion/"> Mon compte </a>
+            </li>
+
+            
+        </ul>
+        
+    </nav>
+    <div class=" absolute bg-[rgba(44,50,102,1)] text-[rgba(44,50,102,1)] text-15xl right-49 z-70">|</div>
+</header>

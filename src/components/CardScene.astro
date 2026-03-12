@@ -1,0 +1,14 @@
+---
+import "../styles/global.css";
+import PbImage from "../components/ImagePB.astro";
+
+const { Scene } = Astro.props;
+console.log(Scene);
+---
+
+<li class="nav-card">
+    <a href={`/scenes/${Scene.id}`} class="nav-card__content">
+        <PbImage record={Scene} recordImage={Scene.photo} />
+        <h2>{Scene.nomScene}</h2>
+    </a>
+</li>

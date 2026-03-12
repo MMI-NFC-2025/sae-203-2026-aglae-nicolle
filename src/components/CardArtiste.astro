@@ -1,0 +1,13 @@
+---
+import "../styles/global.css";
+import PbImage from "../components/ImagePB.astro";
+
+const { Artiste } = Astro.props;
+---
+
+<li class="nav-card">
+    <a href={`/artistes/${Artiste.id}`} class="nav-card__content">
+        <PbImage record={Artiste} recordImage={Artiste.photoPrincipale} />
+        <h2>{Artiste.nomArtiste}</h2>
+    </a>
+</li>

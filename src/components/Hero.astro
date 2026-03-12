@@ -1,0 +1,42 @@
+---
+import "../styles/global.css";
+
+import { Image } from "astro:assets";
+import background from "../assets/img/hero-img.avif";
+---
+
+<section
+    class="relative h-screen pt-5xl px-(--spacing-8xl) flex items-center w-full text-blanc justify-center"
+>
+    <Image
+        class="absolute inset-0 z-0 object-cover object-[center_75%] w-full h-full brightness-60"
+        src={background}
+        alt="Fond du hero"
+    />
+    <div class="relative max-w-full z-10 flex flex-row gap-(--spacing-8xl)">
+        <div>
+            <p class="text-5xl font-bold leading-[1.1]">Echos Sonore –</p>
+        </div>
+
+        <div>
+            <h1 class="text-xl leading-normal max-w-[18rem]">
+                Festival reggae &amp; musiques actuelles
+            </h1>
+
+            <p class="text-base mt-(--spacing-sm) font-semibold">
+                <span class="block mt-(--spacing-2xs)"
+                    >28 &rarr; 31 octobre 2026</span
+                >
+                <span class="block mt-(--spacing-2xs)">Audincourt (25)</span>
+            </p>
+
+            <a
+                class="btn mt-(--spacing-2xl) self-start bg-linear-[135deg] from-noirbleunuit to-bleulectrique text-orange rounded-xl py-4 px-11 text-base font-bold shadow-[0_0.75rem_1.875rem_rgba(0,0,0,0.35)]"
+                href="/404"
+                aria-label="Accéder à la billetterie (fictive)"
+            >
+                Accéder à la billetterie
+            </a>
+        </div>
+    </div>
+</section>
