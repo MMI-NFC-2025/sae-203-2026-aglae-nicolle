@@ -1,0 +1,38 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { login } from "../js/backend.mjs";
+
+if (Astro.request.method === "POST") {
+    const formData = await Astro.request.formData();
+    const email = formData.get("email");
+    const password = formData.get("password");
+
+    const result = await login(email, password);
+
+    if (result.success) {
+        return Astro.redirect(`/connexion/${result.user.id}`);
+    }
+}
+---
+
+<Layout titre="Login - Echos Sonores">
+    <section class="section--wrapper mt-20">
+        <h1 class="section__title text-center">Se connecter</h1>
+        <form method="POST" enctype="multipart/form-data" class="mx-75">
+            <label>Adresse mail</label>
+            <input type="email" name="email" />
+
+            <label>Mot de passe</label>
+            <input type="password" name="password" />
+
+            <button class="btn" type="submit">Se connecter</button>
+        </form>
+
+        <a
+            class="btn mx-75 mt-(--spacing-2xl) self-start bg-linear-[135deg] from-noirbleunuit to-bleulectrique text-orange rounded-xl py-4 px-11 text-base font-bold shadow-[0_0.75rem_1.875rem_rgba(0,0,0,0.35)]"
+            href="/connexion/signin"
+        >
+            S'inscrire
+        </a>
+    </section>
+</Layout>

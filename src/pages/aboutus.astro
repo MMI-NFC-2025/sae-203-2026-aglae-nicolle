@@ -1,0 +1,180 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import feudartifice from "../assets/img/festival.avif";
+import membre1 from "../assets/img/staff-1.avif";
+import membre2 from "../assets/img/staff-2.avif";
+import membre3 from "../assets/img/staff-3.avif";
+import membre4 from "../assets/img/staff-4.avif";
+---
+
+<Layout titre="À propos - Echos Sonores">
+    <Image
+        class="relative inset-0 z-0 object-cover object-[center_85%] w-full h-screen brightness-60"
+        src={feudartifice}
+        alt="Feu d'artifice au-dessus d'une scène de concert"
+        loading="lazy"
+    />
+    <div class="mx-75">
+        <section
+            class="section--wrapper"
+            data-aos="fade-up"
+            data-aos-duration="3000"
+        >
+            <header>
+                <h1 class="section__title text-center">
+                    Le FESTIVAL ECHOS SONORES
+                </h1>
+            </header>
+
+            <div
+                class="leading-normal p-3xl mt-3xl text-justify"
+                data-aos="fade-up"
+            >
+                <p>
+                    Echos Sonore est un nouveau festival de musiques actuelles
+                    dédié à la culture reggae. L'édition inaugurale se déroulera
+                    du 28 au 31 octobre 2026, à Audincourt, sur un site en plein
+                    air pouvant accueillir jusqu'à 3&nbsp;000 personnes par
+                    jour.
+                </p>
+
+                <p>
+                    Conçu comme un rendez-vous automnal pendant les vacances
+                    universitaires, le festival propose une ambiance immersive
+                    inspirée d'Halloween, mêlant lumières, décors et
+                    scénographie nocturne.
+                </p>
+
+                <p>
+                    Le festival veut offrir une expérience conviviale, à taille
+                    humaine, où se rencontrent artistes, public, innovation
+                    locale et engagement citoyen.
+                </p>
+            </div>
+        </section>
+
+        <!-- NOTRE ÉQUIPE (carrousel 4 images) -->
+        <section class="section--wrapper mt-3xl">
+            <header>
+                <h2 class="section__title text-center">Notre équipe</h2>
+            </header>
+
+            <div
+                class="relative max-w-150 mx-auto flex flex-col items-center"
+                aria-label="Carrousel de l'équipe du festival"
+            >
+                <div
+                    class="flex flex-col items-center justify-center gap-(--spacing-2xl) w-full"
+                >
+                    <div class="w-full overflow-hidden rounded-lg mx-auto">
+                        <ul
+                            id="carousel-track"
+                            class="flex list-none p-0 m-0 w-full transition-transform duration-[0.4s] ease-out u-list-unstyled"
+                        >
+                            <li class="carousel__slide">
+                                <Image
+                                    class="team-carousel__photo"
+                                    src={membre1}
+                                    alt="Membre de l'équipe Echos Sonores 1"
+                                    loading="lazy"
+                                />
+                            </li>
+                            <li class="carousel__slide">
+                                <Image
+                                    class="team-carousel__photo"
+                                    src={membre2}
+                                    alt="Membre de l'équipe Echos Sonores 2"
+                                    loading="lazy"
+                                />
+                            </li>
+                            <li class="carousel__slide">
+                                <Image
+                                    class="team-carousel__photo"
+                                    src={membre3}
+                                    alt="Membre de l'équipe Echos Sonores 3"
+                                    loading="lazy"
+                                />
+                            </li>
+                            <li class="carousel__slide">
+                                <Image
+                                    class="team-carousel__photo"
+                                    src={membre4}
+                                    alt="Membre de l'équipe Echos Sonores 4"
+                                    loading="lazy"
+                                />
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div
+                    class="flex gap-(--spacing-2xl) justify-center mt-(--spacing-3xl) w-full"
+                >
+                    <button
+                        id="carousel-prev"
+                        class="relative bg-bleulectrique text-blanc border-none w-12 h-12 rounded-full text-2xl cursor-pointer flex items-center justify-center transition-colors duration-300 ease-in-out shrink-0 hover:bg-rougevif hover:outline-none focus:bg-rougevif focus:outline-none z-10"
+                        type="button"
+                        aria-label="Membre précédent"
+                    >
+                        ‹
+                    </button>
+                    <button
+                        id="carousel-next"
+                        class="relative bg-bleulectrique text-blanc border-none w-12 h-12 rounded-full text-2xl cursor-pointer flex items-center justify-center transition-colors duration-300 ease-in-out shrink-0 hover:bg-rougevif hover:outline-none focus:bg-rougevif focus:outline-none z-10"
+                        type="button"
+                        aria-label="Membre suivant"
+                    >
+                        ›
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+</Layout>
+
+<script>
+    const track = document.getElementById("carousel-track") as HTMLUListElement;
+    const prevBtn = document.getElementById(
+        "carousel-prev",
+    ) as HTMLButtonElement;
+    const nextBtn = document.getElementById(
+        "carousel-next",
+    ) as HTMLButtonElement;
+
+    const slides = track.querySelectorAll<HTMLLIElement>(".carousel__slide");
+    const total = slides.length;
+    let current = 0;
+
+    function goTo(index: number): void {
+        // Boucle infinie
+        current = (index + total) % total;
+        track.style.transform = `translateX(-${current * 100}%)`;
+    }
+
+    // Chaque slide occupe 100% de la largeur du track
+    slides.forEach((slide) => {
+        slide.style.minWidth = "100%";
+    });
+
+    prevBtn.addEventListener("click", () => goTo(current - 1));
+    nextBtn.addEventListener("click", () => goTo(current + 1));
+
+    // Navigation au clavier
+    document.addEventListener("keydown", (e: KeyboardEvent) => {
+        if (e.key === "ArrowLeft") goTo(current - 1);
+        if (e.key === "ArrowRight") goTo(current + 1);
+    });
+
+    // Swipe tactile
+    let startX = 0;
+    track.addEventListener("touchstart", (e: TouchEvent) => {
+        startX = e.touches[0].clientX;
+    });
+    track.addEventListener("touchend", (e: TouchEvent) => {
+        const diff = startX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) {
+            diff > 0 ? goTo(current + 1) : goTo(current - 1);
+        }
+    });
+</script>

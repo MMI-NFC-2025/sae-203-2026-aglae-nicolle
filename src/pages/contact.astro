@@ -1,0 +1,73 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout titre="Contact - Echos Sonores">
+    <section class="section--wrapper">
+        <h1 class="section__title text-center mt-15">Contact</h1>
+        <!-- FORMULAIRE -->
+        <form
+            class="flex flex-col gap-(--spacing-xl)"
+            action="#"
+            method="post"
+            autocomplete="on"
+        >
+            <div>
+                <label class="u-sr-only" for="name"> Nom </label>
+                <input
+                    class="contact-form__input"
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                    placeholder="NAME"
+                />
+            </div>
+
+            <div class="contact-form__group">
+                <label class="contact-form__label u-sr-only" for="email">
+                    Email
+                </label>
+                <input
+                    class="contact-form__input"
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    placeholder="MAIL"
+                />
+            </div>
+
+            <div class="contact-form__group">
+                <label class="contact-form__label u-sr-only" for="subject">
+                    Sujet
+                </label>
+                <input
+                    class="contact-form__input"
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    required
+                    placeholder="SUJET"
+                />
+            </div>
+
+            <div class="contact-form__group">
+                <label class="contact-form__label u-sr-only" for="message">
+                    Message
+                </label>
+                <textarea
+                    class="contact-form__textarea"
+                    id="message"
+                    name="message"
+                    rows="6"
+                    required
+                    placeholder="MESSAGE"></textarea>
+            </div>
+
+            <button class="btn contact-form__submit" type="submit">
+                Envoyer
+            </button>
+        </form>
+    </section>
+</Layout>

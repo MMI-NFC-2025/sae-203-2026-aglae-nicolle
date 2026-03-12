@@ -1,0 +1,36 @@
+---
+import { getArtisteById } from "../js/backend.mjs";
+import { formatDate } from "../js/backend.mjs";
+import PbImage from "../../components/ImagePB.astro";
+import Layout from "../../layouts/Layout.astro";
+
+const { id } = Astro.params;
+const artiste = await getArtisteById(id);
+
+if (!artiste) {
+    return Astro.redirect("/scenes");
+}
+console.log(artiste);
+const date = formatDate(artiste.dateRepresentation);
+---
+
+<Layout titre={artiste.nomArtiste}>
+    <div class="mx-75 my-30">
+        <h2 class="mb-15">{artiste.nomArtiste}</h2>
+        <ul class="gap-10 grid grid-cols-3">
+            <PbImage record={artiste} recordImage={artiste.photoPrincipale} />
+            <li class="text-justify col-span-2">
+                {artiste.descriptionArtiste}<br /><br />
+                <strong>Genre : </strong>{artiste.genre}<br />
+                <strong>Date de représentation : </strong>{date}<br />
+            </li>
+            {
+                artiste.galerie.map((image) => (
+                    <li>
+                        <PbImage record={artiste} recordImage={image} />
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
+</Layout>

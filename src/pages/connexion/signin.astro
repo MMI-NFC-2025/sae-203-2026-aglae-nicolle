@@ -1,0 +1,39 @@
+---
+import { ASTRO_LOCALS_HEADER } from "@astrojs/vercel";
+import Layout from "../../layouts/Layout.astro";
+import { signin } from "../js/backend.mjs";
+
+if (Astro.request.method === "POST") {
+    const formData = await Astro.request.formData();
+    const reponse = await signin(formData);
+    console.log(reponse.message);
+    if (reponse.success == true) {
+        return Astro.redirect("/connexion/");
+    }
+}
+---
+
+<Layout titre="Login - Echos Sonores">
+    <section class="section--wrapper">
+        <h1 class="section__title mt-20">S'inscrire</h1>
+        <form method="POST" enctype="multipart/form-data" class="mx-75">
+            <label>Adresse mail</label>
+            <input type="email" name="email" />
+
+            <label>Mot de passe</label>
+            <input type="password" name="password" />
+
+            <label>Confirmation de mot de passe</label>
+            <input type="password" name="passwordConfirm" />
+
+            <button class="btn" type="submit">S'inscrire</button>
+        </form>
+
+        <a
+            class="btn mx-75 mt-(--spacing-2xl) self-start bg-linear-[135deg] from-noirbleunuit to-bleulectrique text-orange rounded-xl py-4 px-11 text-base font-bold shadow-[0_0.75rem_1.875rem_rgba(0,0,0,0.35)]"
+            href="/connexion/"
+        >
+            Se connecter
+        </a>
+    </section>
+</Layout>

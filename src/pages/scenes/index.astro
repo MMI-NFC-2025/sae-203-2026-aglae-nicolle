@@ -1,0 +1,28 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Card from "../../components/CardScene.astro";
+import * as bcknd from "../js/backend.mjs";
+const scenes = await bcknd.getAllScenes();
+---
+
+<Layout titre="Scènes - Echos Sonores">
+    <section
+        class="section--wrapper mt-15 mx-auto px-(--spacing-xl) py-(--spacing-4xl) bg-noirbleunuit text-blanc"
+    >
+        <div class="mx-75">
+            <header class="mb-(--spacing-3xl)">
+                <h1
+                    class="section__title text-3xl text-center font-bold uppercase"
+                >
+                    Les Scènes du Echos Sonores
+                </h1>
+            </header>
+            <p class="text-base leading-normal mb-(--spacing-4xl) max-w-128">
+                Découvrez les différentes scènes de notre festival.
+            </p>
+            <ul class="mt-(--spacing-4xl) grid grid-cols-2 gap-(--spacing-4xl)">
+                {scenes.map((scene) => <Card Scene={scene} />)}
+            </ul>
+        </div>
+    </section>
+</Layout>

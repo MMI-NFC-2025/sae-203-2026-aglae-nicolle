@@ -1,0 +1,33 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Card from "../../components/CardArtiste.astro";
+import * as bcknd from "../js/backend.mjs";
+const artistes = await bcknd.getAllArtistesSByName();
+---
+
+<Layout titre="Artistes - Echos Sonores">
+    <section
+        class="section--wrapper mt-15 mx-auto px-(--spacing-xl) py-(--spacing-4xl) bg-noirbleunuit text-blanc"
+    >
+        <div class="mx-75">
+            <header class="mb-(--spacing-3xl)">
+                <h1
+                    class="section__title text-3xl font-bold uppercase text-center"
+                >
+                    Les artistes
+                </h1>
+            </header>
+
+            <p class="text-base leading-normal mb-(--spacing-4xl) max-w-128">
+                Découvrez les artistes programmés sur les 4 jours du festival
+                Echos Sonore&nbsp;: roots, dub, reggae fusion et musiques du
+                monde.
+            </p>
+            <div
+                class="mt-(--spacing-4xl) grid grid-cols-2 gap-(--spacing-4xl)"
+            >
+                {artistes.map((artiste) => <Card Artiste={artiste} />)}
+            </div>
+        </div>
+    </section>
+</Layout>

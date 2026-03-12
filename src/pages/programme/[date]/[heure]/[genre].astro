@@ -1,0 +1,95 @@
+---
+import { getArtistesByDateEtGenre } from "../../../js/backend.mjs";
+import Layout from "../../../../layouts/Layout.astro";
+import Card from "../../../../components/CardArtiste.astro";
+
+const { date, heure, genre } = Astro.params;
+
+const artistes = await getArtistesByDateEtGenre({
+    date: date !== "_" ? date : undefined,
+    heureDebut: heure !== "_" ? heure : undefined,
+    genre: genre !== "_" ? genre : undefined,
+});
+---
+
+<Layout titre="Programme - Echos Sonores">
+    <section class="section--wrapper mt-15">
+        <h1 class="section__title text-center">Programme</h1>
+        <!-- filtres jours (maquette : TOUS / VEN / SAM / DIM / LUN) -->
+        <form id="programme-form" class="flex gap-7">
+            <label for="date">Date</label>
+            <input
+                type="date"
+                id="date"
+                name="date"
+                min="2026-10-28"
+                max="2026-10-31"
+            />
+
+            <label for="heure">Heure</label>
+            <input type="time" id="heure" name="heure" />
+
+            <label for="genre">Genre</label>
+            <select id="genre" name="genre">
+                <option value="" class="bg-bleulectrique">
+                    Tous les genres
+                </option>
+                <option value="" class="bg-bleulectrique"> Techno </option>
+                <option value="" class="bg-bleulectrique"> Folk </option>
+                <option value="" class="bg-bleulectrique"> Pop </option>
+                <option value="" class="bg-bleulectrique"> Reggae </option>
+                <option value="" class="bg-bleulectrique"> Métal </option>
+                <option value="" class="bg-bleulectrique"> Rock </option>
+                <option value="" class="bg-bleulectrique"> Electro </option>
+                <option value="" class="bg-bleulectrique"> Funk </option>
+                <option value="" class="bg-bleulectrique"> Hip-Hop </option>
+                <option value="" class="bg-bleulectrique"> Phonk </option>
+            </select>
+
+            <button class="btn" type="submit">Rechercher</button>
+        </form>
+
+        <div
+            class="relative bg-[rgba(44,50,102,1)] h-0.5 w-full my-xl text-center"
+        >
+        </div>
+
+        <!-- LISTE DES JOURS (cartes rouges avec dégradé) -->
+        <div
+            class="mt-(--spacing-4xl) grid grid-cols-2 gap-(--spacing-4xl) mx-75"
+        >
+            {artistes.map((artiste) => <Card Artiste={artiste} />)}
+        </div>
+
+        <!-- BOUTON PDF (en bas comme sur la maquette) -->
+        <div
+            class="mt-(--spacing-4xl) text-center"
+            data-aos="fade-down"
+            data-aos-easing="linear"
+            data-aos-duration="1500"
+        >
+            <a
+                class="btn btn--light inline-block bg-blanc text-rougevif rounded-sm py-[0.6rem] px-[1.8rem] text-sm font-semibold no-underline hover:opacity-90 focus:opacity-90"
+                href="/assets/doc/programme-echos-sonore.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Télécharger programme PDF
+            </a>
+        </div>
+    </section>
+</Layout>
+
+<script>
+    document
+        .getElementById("programme-form")
+        .addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const date = e.target.date.value || "_";
+            const heure = e.target.heure.value || "_";
+            const genre = e.target.genre.value || "_";
+
+            window.location.href = `/programme/${date}/${heure}/${genre}`;
+        });
+</script>

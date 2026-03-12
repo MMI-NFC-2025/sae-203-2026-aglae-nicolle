@@ -1,0 +1,29 @@
+---
+import { getSceneById } from "../js/backend.mjs";
+import { getAllArtistesBySceneIdSByDate } from "../js/backend.mjs";
+import PbImage from "../../components/ImagePB.astro";
+import Layout from "../../layouts/Layout.astro";
+import Card from "../../components/CardArtiste.astro";
+
+const { id } = Astro.params;
+const scene = await getSceneById(id);
+const artistes = await getAllArtistesBySceneIdSByDate(id);
+
+if (!scene) {
+    return Astro.redirect("/scenes");
+}
+---
+
+<Layout titre={scene.nomScene}>
+    <h2>{scene.nomScene}</h2>
+    <ul>
+        <PbImage record={scene} recordImage={scene.photo} />
+        <li>{scene.descriptionScene}</li>
+        <li>{scene.localisation}</li>
+        <li>{scene.capacite}</li>
+    </ul>
+    <h3>Les artistes</h3>
+    <ul>
+        {artistes.map((artiste) => <Card Artiste={artiste} />)}
+    </ul>
+</Layout>
