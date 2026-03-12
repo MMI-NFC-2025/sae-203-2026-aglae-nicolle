@@ -7,6 +7,11 @@ import netlify from '@astrojs/netlify';
 
 // https://astro.build/config
 export default defineConfig({
+
+  image: {
+    domains: ["sae-203.aglaenicolle.fr"],
+  },
+
   output: 'server',
 
   vite: {
